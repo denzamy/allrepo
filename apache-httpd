@@ -1,5 +1,12 @@
+########################
+#Cek mpm_prefork_module#
+########################
 
+yum install httpd httpd-tools php-fpm
 
+sudo apachectl -t -D DUMP_MODULES |grep mpm
+
+#Konfigurasi Parameter Virtual Host
 <VirtualHost *:80>
     ServerAdmin admin@k-vision.tv
     #Redirect permanent / https://sikovi.k-vision.tv/
@@ -16,14 +23,13 @@
     </Directory>
 </VirtualHost>
 
-
-
-#httpd.conf
-
+##################################
+#Konfigurasi Parameter httpd.conf#
+##################################
 KeepAliveTimeout 5
 MaxKeepAliveRequests 500
 KeepAlive On
-
+HostnameLookups Off
 <IfModule prefork.c>
     StartServers 5
     MinSpareServers 5
@@ -32,3 +38,46 @@ KeepAlive On
     MaxRequestsPerChild 3000
 </IfModule>
 
+##################################
+#Mengaktifkan Parameter MOD Event#
+##################################
+nano /etc/httpd/conf.modules.d/00-mpm.conf
+Aktifkan parameter 
+LoadModule mpm_event_module modules / mod_mpm_event.so
+
+Pastikan paket php-fpm, fcgi, mod_fcgid sudah terinstall
+Untuk pengecekan gunakanak command httpd -V
+
+#Pastikan konfigurasi firewall sudah benar
+firewall-cmd --zone=internal --add-interface=tun6to4 
+firewall-cmd --zone=internal --add-interface=tun6to4 --permanent 
+firewall-cmd --set-default-zone=internal 
+firewall-cmd --add-service=http 
+firewall-cmd --add-service=https 
+firewall-cmd --add-service=http --permanent 
+firewall-cmd --add-service=https --permanent 
+firewall-cmd --reload
+
+KeepAliveTimeout 5
+MaxKeepAliveRequests 500
+KeepAlive On
+HostnameLookups Off
+<IfModule mpm_event_module>
+    StartServers 3
+    MinSpareThreads 25
+    MaxSpareThreads 75
+    ThreadLimit 64
+    ThreadsPerChild 25
+    MaxRequestWorkers 30
+    MaxConnectionsPerChild 1000
+</IfModule>
+
+
+systemctl restart httpd php-fpm && systemctl enable httpd php-fpm
+
+
+###########
+#Referensi#
+###########
+https://blog.vpscheap.net/how-to-optimize-apache-performance-on-centos-7/
+https://www.tecmint.com/apache-performance-tuning/
