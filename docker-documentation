@@ -8,3 +8,8 @@ docker run -it alpine sh
 
 #PORT
 docker ps
+
+
+
+referensi:
+https://linoxide.com/containers/install-docker-ubuntu-20-04/?utm_source=feedburner&utm_medium=email&utm_campaign=Feed%3A+linoxideblog+%28LinOxide+Blog%29
