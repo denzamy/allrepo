@@ -1,0 +1,10 @@
+#DOCKER DESKTOP ENVIRONMENT
+#CREATE DOCKER CT
+docker container run --detach --publish-all dockersamples/static-site
+docker run -d -p 80:80 --name webserver nginx
+
+#RUN SHELL CT
+docker run -it alpine sh
+
+#PORT
+docker ps
