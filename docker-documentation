@@ -16,7 +16,18 @@ https://linoxide.com/containers/install-docker-ubuntu-20-04/?utm_source=feedburn
 
 
 
-KUBERNETES
+#KUBERNETES
+
+#token k8s docker
+eyJhbGciOiJSUzI1NiIsImtpZCI6InJfVGhKVlFfQmJkRmpvb1pJWVR1RU13aDM3d0gzMlB2OGVzT1BwMmVxbVEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZC10b2tlbi10OWJwbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjQxNmE5NWU4LTdlODgtNDhkZi04MWJlLTFiYzgzMWNhNTMzZCIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDprdWJlcm5ldGVzLWRhc2hib2FyZCJ9.WFsGeh_JMol-BfFsFkFuPOrMQk0F2xnklmsuc_bBGc-i1MqBApNgtJzHHm2v6Gj2Yg501PQsqMYUBT3oVZafuRf9HshrrWYf-Ps1Le71rYe0GDgNHNLX_4BF-ik2lYRddnmFPUspOcpV6LIL_M9KnIP6uTFBgu5Yve_GZi-sj2gUyqprOaSRnE6j26VE2Ulh7cleo1wngrmMjWWuZrZET2Gg9iOKeMZV8Vm5gv9VSOL0CbiKt3hqKSz1v9WLoFaZ3-OMXlCHAQIFZhCLz5dRX7bi10EE1EG6RUB37JMSqMdC7YKIV-JQt4MzyaUp0ufDg1zE5cobZ60WwOnXbkFiYw
+
+#CMD Command
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | findstr admin-user-token | awk '{print $1}')
+#PowerShell Command
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | Select-String admin-user-token | awk '{print $1}')
+
+
+referensi
 https://8gwifi.org/docs/kube-dash.jsp
 https://collabnix.com/kubernetes-dashboard-on-docker-desktop-for-windows-2-0-0-3-in-2-minutes/
 https://rizkimufrizal.github.io/instalasi-dan-setup-kubernetes-cluster/
