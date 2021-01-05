@@ -1,0 +1,8 @@
+VUE.JS & TAILWINDCSS
+=========================
+npm cache clean --force
+npm install -g @vue/cli
+vue create myproject
+cd myprojects
+npm run serve
+vue add tailwind
